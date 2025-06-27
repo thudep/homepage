@@ -1,0 +1,155 @@
+@media (min-width: 720px) and (max-width: 1080px){
+    /* header */
+    .menu-icon{
+        display: block;
+        background-color: transparent;
+        color: white;
+        font-size: 50px;
+        position: absolute;
+        top: 7px;
+        right: 2vw;
+        border: none;
+        cursor: pointer;
+        z-index: 1000;
+    }
+
+    .menu{
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        background-color: white;
+        box-shadow: 0 9px 18px 0 rgba(0,0,0,0.2);
+        min-width: 180px;
+        z-index: 1001;
+    }
+    .menu ul{
+        list-style-type: none;
+        line-height: normal;
+        padding: 0;
+        margin: 0;
+    }
+    .menu ul li{
+        margin: 0;
+    }
+    .menu ul li a{
+        padding: 18px 18px;
+        display: block;
+        text-decoration: none;
+        color: black;
+    }
+    .menu ul li a:hover {
+        background-color: gray;
+        color: white;
+    }
+}
+
+@media (max-width: 720px){
+    /* header */
+    header{
+        height: 12.5vw;
+    }
+
+    h1{
+        font-size: 5vw;
+        left: 37.5vw;
+        line-height: 12.5vw;
+    }
+
+    .headerlogo{
+        width: 12.5vw;
+        height: 12.5vw;
+    }
+    .menu-icon{
+        display: block;
+        background-color: transparent;
+        color: white;
+        font-size: 7vw;
+        position: absolute;
+        top: 1vw;
+        right: 2vw;
+        border: none;
+        cursor: pointer;
+        z-index: 1000;
+    }
+
+    .menu{
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        background-color: white;
+        box-shadow: 0 1.25vw 2.5vw 0 rgba(0,0,0,0.2);
+        min-width: 25vw;
+        z-index: 1001;
+    }
+    .menu ul{
+        list-style-type: none;
+        line-height: normal;
+        padding: 0;
+        margin: 0;
+    }
+    .menu ul li{
+        margin: 0;
+    }
+    .menu ul li a{
+        font-size: 2.5vw;
+        padding: 2.5vw 2.5vw;
+        display: block;
+        text-decoration: none;
+        color: black;
+    }
+    .menu ul li a:hover {
+        background-color: gray;
+        color: white;
+    }
+    /* section */
+    .introduction{
+        padding: 12.5vw 5vw 1.25vw;
+        margin-bottom: 1.25vw;
+    }
+
+    .content{
+        padding: 1.25vw 5vw 1.25vw;
+        margin-bottom: 1.25vw;
+    }
+
+    .QRcode img{
+        width: 50vw;
+        height: 50vw;
+    }
+    /* schedule */
+    .course_registration_calendar{
+        font-size: 2.5vw;
+    }
+}
+
+@media (max-width: 900px){
+    /* section */
+    .content img{
+        width: 80vw;
+    }
+
+    .website{
+        width: 80vw;
+    }
+
+    .QRcode{
+        width: 80vw;
+    }
+    /* schedule */
+    .schedule{
+        width: 80vw;
+    }
+    .course_registration_calendar{
+        width: 80vw;
+        border: 0.3vw solid gray;
+        margin: 2vw auto;
+        border-collapse: collapse;
+    }
+    .course_registration_calendar th, td{
+        border: 0.2vw solid lightgray;
+        padding: 1vw;
+        text-align: center;
+    }
+}
