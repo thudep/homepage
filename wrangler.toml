@@ -1,0 +1,4 @@
+assets = {directory = "./website"}
+compatibility_date = "2025-6-27"
+name = "homepage"
+workers_dev = false
