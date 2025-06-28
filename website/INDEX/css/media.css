@@ -137,19 +137,4 @@
     .QRcode{
         width: 80vw;
     }
-    /* schedule */
-    .schedule{
-        width: 80vw;
-    }
-    .course_registration_calendar{
-        width: 80vw;
-        border: 0.3vw solid gray;
-        margin: 2vw auto;
-        border-collapse: collapse;
-    }
-    .course_registration_calendar th, td{
-        border: 0.2vw solid lightgray;
-        padding: 1vw;
-        text-align: center;
-    }
 }
