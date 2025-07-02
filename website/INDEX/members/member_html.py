@@ -1,42 +1,5 @@
-from pypinyin import lazy_pinyin, load_phrases_dict
 import json
 from bs4 import BeautifulSoup
-
-# 多音字的名字处理
-homophone = {
-    '吕晟昊' : [['lv'], ['Sheng'], ['Hao']]
-}
-load_phrases_dict(homophone)
-
-def name_to_pinyin(name: str) -> str:
-    '''
-    把人名转化为拼音, 保证每个字首字母大写
-    '''
-    pinyins = lazy_pinyin(name)
-    capitalized = [p.capitalize() for p in pinyins] #首字母大写
-    return ''.join(capitalized)
-
-def class_to_initials(class_name: str) -> str:
-    '''
-    把班级名转化为大写首字母加数字的格式
-    '''
-    result = []
-    for char in class_name:
-        if char.isdigit():
-            result.append(char) #直接保留数字
-        else:
-            py = lazy_pinyin(char)[0]
-            result.append(py[0].upper()) #拼音首字母大写
-    return ''.join(result)
-
-def html_name(member: dict) -> str:
-    '''
-    使用姓名与班级作为网页名
-    '''
-    if 'class' in member:
-        return name_to_pinyin(member['name']) + '-' + class_to_initials(member['class'])
-    else:
-        return name_to_pinyin(member['name'])
 
 # 读取json
 with open('Members.json', 'r', encoding='utf-8') as f:
@@ -89,5 +52,5 @@ for member in members:
     # 插入到 <main> 最后
     soup.main.append(section_tag)
     # 保存结果
-    with open(f'member/{html_name(member)}.html', 'w', encoding='utf-8') as f:
+    with open(f"member/{member['website']}.html", 'w', encoding='utf-8') as f:
         f.write(str(soup))

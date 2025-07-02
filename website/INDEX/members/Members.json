@@ -14,7 +14,8 @@
         "position3": "主席",
         "work1": "测试1",
         "work2": "测试2",
-        "work3": "测试3"
+        "work3": "测试3",
+        "website": "HeYuFeng-H21"
     },
     {
         "name": "邹昀恒",
@@ -23,7 +24,8 @@
         "GitHub": "ttlight",
         "session1": 33,
         "department1": "赛事口",
-        "position1": "干事"
+        "position1": "干事",
+        "website": "ZouYunHeng-GW40"
     },
     {
         "name": "刘丰华",
@@ -32,7 +34,8 @@
         "GitHub": "J1angcheng",
         "session1": 33,
         "department1": "技术口",
-        "position1": "干事"
+        "position1": "干事",
+        "website": "LiuFengHua-H41"
     },
     {
         "name": "桂悦峰",
@@ -41,7 +44,8 @@
         "GitHub": "heyhey0821",
         "session1": 33,
         "department1": "科创口",
-        "position1": "干事"
+        "position1": "干事",
+        "website": "GuiYueFeng-H41"
     },
     {
         "name": "樊玉博",
@@ -49,7 +53,8 @@
         "mail": "fyb24@mails.tsinghua.edu.cn",
         "session1": 33,
         "department1": "技术口",
-        "position1": "干事"
+        "position1": "干事",
+        "website": "FanYuBo-H42"
     },
     {
         "name": "罗俊杭",
@@ -58,7 +63,8 @@
         "GitHub": "theMaster-L",
         "session1": 33,
         "department1": "科创口",
-        "position1": "干事"
+        "position1": "干事",
+        "website": "LuoJunHang-H42"
     },
     {
         "name": "钱昊远",
@@ -70,7 +76,8 @@
         "position1": "干事",
         "session2": 33,
         "department2": "技术口",
-        "position2": "副主席"
+        "position2": "副主席",
+        "website": "QianHaoYuan-H31"
     },
     {
         "name": "方睿泉",
@@ -79,7 +86,8 @@
         "GitHub": "Yours22",
         "session1": 33,
         "department1": "技术口",
-        "position1": "干事"
+        "position1": "干事",
+        "website": "FangRuiQuan-H21"
     },
     {
         "name": "陈卓裕",
@@ -94,26 +102,30 @@
         "position2": "干事",
         "session3": 33,
         "department3": "技术口",
-        "position3": "干事（已毕业）"
+        "position3": "干事（已毕业）",
+        "website": "ChenZhuoYu-WYGW11"
     },
     {
         "name": "夏子睿",
         "session1": 31,
         "position1": "主席",
-        "work1": "测试1"
+        "work1": "测试1",
+        "website": "XiaZiRui"
     },
     {
         "name": "吴寓嘉",
         "session1": 31,
         "department1": "宣传口",
-        "position1": "副主席"
+        "position1": "副主席",
+        "website": "WuYuJia"
     },
     {
         "name": "孙乐然",
         "class": "未央工物11",
         "session1": 31,
         "department1": "赛事口",
-        "position1": "副主席"
+        "position1": "副主席",
+        "website": "SunLeRan-WYGW11"
     },
     {
         "name": "温欣洋",
@@ -124,21 +136,24 @@
         "session2": 32,
         "position2": "主席",
         "work1": "测试1",
-        "work2": "测试2"
+        "work2": "测试2",
+        "website": "WenXinYang-WYGW11"
     },
     {
         "name": "杨哲涵",
         "class": "工物22",
         "session1": 32,
         "department1": "技术口",
-        "position1": "副主席"
+        "position1": "副主席",
+        "website": "YangZheHan-GW22"
     },
     {
         "name": "吴震宇",
         "class": "核22",
         "session1": 32,
         "department1": "赛事口",
-        "position1": "副主席"
+        "position1": "副主席",
+        "website": "WuZhenYu-H22"
     },
     {
         "name": "宋炫莹",
@@ -148,14 +163,16 @@
         "position1": "副主席",
         "session2": 33,
         "department2": "宣传口",
-        "position2": "副主席"
+        "position2": "副主席",
+        "website": "SongXuanYing-WYGW31"
     },
     {
         "name": "周畅",
         "class": "未央工物31",
         "session1": 33,
         "department1": "赛事口",
-        "position1": "副主席"
+        "position1": "副主席",
+        "website": "ZhouChang-WYGW31"
     },
     {
         "name": "吕晟昊",
@@ -165,13 +182,15 @@
         "position1": "干事",
         "session2": 33,
         "department2": "科创口",
-        "position2": "副主席"
+        "position2": "副主席",
+        "website": "LvShengHao-H32"
     },
     {
         "name": "黄浩",
         "class": "未央工物31",
         "session1": 33,
         "department1": "常务口",
-        "position1": "副主席"
+        "position1": "副主席",
+        "website": "HuangHao-WYGW31"
     }
 ]
