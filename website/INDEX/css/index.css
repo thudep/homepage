@@ -1,0 +1,22 @@
+body{
+    background: linear-gradient(135deg, rgb(102, 8, 116), darkblue, rgb(102, 8, 116));
+    color: #fff;
+    min-height: 100vh; 
+    padding-top: 100px;
+    background-attachment: fixed;
+    background-size: cover;
+    position: relative;
+}
+
+body::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../img/background.jpg) no-repeat center center;
+    background-size: cover;
+    opacity: 0.3;
+    z-index: -1;
+}
