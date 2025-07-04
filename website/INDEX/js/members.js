@@ -42,7 +42,7 @@ function loadmembers(session){
                                 break;
                         }
                         const link = document.createElement("a");
-                        link.href = `members/${member['website']}.html`;
+                        link.href = `members/member/${member['website']}.html`;
                         link.textContent = member['name'];
                         link.target = '_blank';
                         Member.appendChild(link);
