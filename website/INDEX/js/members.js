@@ -162,10 +162,10 @@ function loadmembers(session){
                     }
                 }
             });
+
+            drawConnections()
         })
         .catch(error => console.error('Error loading members:', error));
-
-    drawConnections()
 }
 
 // 添加悬停效果
