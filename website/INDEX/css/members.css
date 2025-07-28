@@ -35,6 +35,25 @@
     min-height: 600px;
 }
 
+.session-change-btn {
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.session-change-btn:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(1.1);
+}
+
 /* 主席节点样式 */
 .chairman {
     position: relative;
@@ -177,12 +196,6 @@
     text-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
-.vice-chairman .node .position {
-    font-size: 1rem;
-    opacity: 0.9;
-    margin-bottom: 3px;
-}
-
 .vice-chairman .node .department {
     display: inline-block;
     margin-top: 8px;
@@ -292,6 +305,25 @@
     to {
         stroke-dashoffset: 1000;
     }
+}
+
+/* 届数变化动画 */
+.fade-out {
+    animation: fadeOut 0.3s forwards;
+}
+
+.fade-in {
+    animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(20px); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* 响应式设计 */

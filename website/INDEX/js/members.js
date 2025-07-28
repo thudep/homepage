@@ -1,11 +1,15 @@
-const SESSION = 33; // 主显示届数
+const MIN_SESSION = 31 // 最小届数
+const NOW_SESSION = 33 // 主显示届数
+let SESSION = NOW_SESSION
 
 function loadmembers(session){
     fetch('./members/Members.json')
         .then(response => response.json())
         .then(members => {
             const Chairman = document.getElementById('chairman')
+            Chairman.innerHTML = ''
             const VCS = document.getElementById('vice-chairmans')
+            VCS.innerHTML = ''
             // 宣传口
             const Publicity = document.createElement('div')
             Publicity.classList.add('vc-container')
@@ -73,7 +77,16 @@ function loadmembers(session){
                             // 职务
                             const Position = document.createElement('div')
                             Position.classList.add('position')
-                            Position.textContent = '主席'
+                            if(session > MIN_SESSION){
+                                Position.innerHTML = `第${session}届科协主席
+                                    <button class="session-change-btn decrease">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </button>
+                                `
+                            }
+                            else{
+                                Position.innerHTML = `第${session}届科协主席`
+                            }
                             Node.appendChild(Position)
                         }
                         
@@ -89,12 +102,14 @@ function loadmembers(session){
                             link.innerText = member['name']
                             link.target = '_blank'
                             Name.appendChild(link)
+                            if(member[`position${s+1}`] === "主席"){
+                                Name.insertAdjacentHTML("beforeend", `
+                                    <button class="session-change-btn increase">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </button>
+                                `)
+                            }
                             Node.appendChild(Name)
-                            // 职务
-                            const Position = document.createElement('div')
-                            Position.classList.add('position')
-                            Position.textContent = '副主席'
-                            Node.appendChild(Position)
                             // 部门
                             const Deparment = document.createElement('div')
                             Deparment.classList.add('department')
@@ -164,23 +179,38 @@ function loadmembers(session){
             });
 
             drawConnections()
+            hoverEffect()
+            document.querySelectorAll('.decrease').forEach(elem => {
+                elem.addEventListener('click', () => {
+                    SESSION--
+                    reload(SESSION)
+                })
+            })
+            document.querySelectorAll('.increase').forEach(elem => {
+                elem.addEventListener('click', () => {
+                    SESSION++
+                    reload(SESSION);
+                })
+            })
         })
         .catch(error => console.error('Error loading members:', error));
 }
 
 // 添加悬停效果
-const nodes = document.querySelectorAll('.node');
-nodes.forEach(node => {
-    node.addEventListener('mouseenter', function() {
-        this.style.transform = this.classList.contains('chairman') ? 
-            'translateY(-8px) rotateX(8deg)' : 
-            'translateY(-5px) rotateY(8deg)';
+function hoverEffect(){
+    const nodes = document.querySelectorAll('.node');
+    nodes.forEach(node => {
+        node.addEventListener('mouseenter', function() {
+            this.style.transform = this.classList.contains('chairman') ? 
+                'translateY(-8px) rotateX(8deg)' : 
+                'translateY(-5px) rotateY(8deg)';
+        });
+        
+        node.addEventListener('mouseleave', function() {
+            this.style.transform = '';
+        });
     });
-    
-    node.addEventListener('mouseleave', function() {
-        this.style.transform = '';
-    });
-});
+}
 
 // 绘制曲线连接线
 function drawConnections() {
@@ -224,5 +254,27 @@ function drawConnections() {
     });
 }
 
-window.addmemberListener('load', loadmembers(SESSION));
-window.addEventListener('resize', drawConnections);
+function loadAll(){
+    SESSION = NOW_SESSION
+    loadmembers(SESSION)
+}
+
+function reload(session){
+    const orgChart = document.querySelector('.org-chart');
+    orgChart.classList.add('fade-out');
+
+    setTimeout(() => {
+        // 根据SESSION加载不同届数的数据
+        loadmembers(session)
+        // 动画效果
+        orgChart.classList.remove('fade-out');
+        orgChart.classList.add('fade-in');        
+        setTimeout(() => {
+            orgChart.classList.remove('fade-in');
+        }, 300);
+    }, 300);
+
+}
+
+window.addEventListener('load', loadAll());
+window.addEventListener('resize', drawConnections());
