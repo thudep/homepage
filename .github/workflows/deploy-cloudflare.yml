@@ -10,7 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy
     steps:
+      # 拉取代码
       - uses: actions/checkout@v4
+      # 补全网页内容
+      - name: Run Makefile
+        run: make -C website/INDEX/members all
+      # 部署网页
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:
