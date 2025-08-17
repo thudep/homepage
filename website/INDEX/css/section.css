@@ -48,6 +48,9 @@
     margin: auto;
     object-fit: contain;
 }
+.content i{
+    text-indent: 0;
+}
 
 .website{
     border: 2.7px solid gray;
