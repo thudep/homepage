@@ -55,7 +55,7 @@ def add_position(soup, section_tag, member: dict) -> None:
 
 def main():
     # 读取json
-    with open('Members.json', 'r', encoding='utf-8') as f:
+    with open('members.json', 'r', encoding='utf-8') as f:
         members = json.load(f)
     
     # 遍历每个人, 生成对应的网页
@@ -84,7 +84,7 @@ def main():
         soup.main.append(section_tag)
         # 保存结果
         with open(f"member/{member['website']}.html", 'w', encoding='utf-8') as f:
-            f.write(str(soup))
+            f.write(soup.prettify())
 
 if __name__ == "__main__":
     main()

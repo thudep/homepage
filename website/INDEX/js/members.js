@@ -3,7 +3,7 @@ const NOW_SESSION = 33 // 主显示届数
 let SESSION = NOW_SESSION
 
 function loadmembers(session){
-    fetch('./members/Members.json')
+    fetch('./members/members.json')
         .then(response => response.json())
         .then(members => {
             const Chairman = document.getElementById('chairman')

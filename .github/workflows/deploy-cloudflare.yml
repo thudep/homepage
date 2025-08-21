@@ -17,7 +17,7 @@ jobs:
         run: pip install beautifulsoup4
       # 补全网页内容
       - name: Run Makefile
-        run: make -C website/INDEX/members all
+        run: make all
       # 部署网页
       - name: Deploy
         uses: cloudflare/wrangler-action@v3

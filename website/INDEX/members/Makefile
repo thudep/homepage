@@ -1,15 +1,13 @@
-.PHONY: html all
+.PHONY: html
 
-Members.json:
-	python members.py
+members.json:
+	python csv2json.py
 
-html: Members.json
-	python member_html.py
-
-all: html
+html: members.json
+	python json2html.py
 
 .PHONY: clean
 
 clean:
-	rm Members.json
+	rm members.json
 	find member -type f ! -name '.gitignore' ! -name 'template.html' -delete

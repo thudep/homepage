@@ -38,9 +38,9 @@ def html_name(member: dict) -> str:
     else:
         return name_to_pinyin(member['name'])
 
-# 导入excel数据与预处理
-excel_file = 'Members.xlsx'
-df = pd.read_excel(excel_file)
+# 导入csv数据与预处理
+csv_file = '../../../content/members/members.csv'
+df = pd.read_csv(csv_file)
 members_list = df.to_dict(orient='records')
 
 members_json = []
@@ -82,5 +82,5 @@ for member in members_list:
     members_json.append(member_json)
 
 # 将列表写入JSON文件
-with open('Members.json', 'w', encoding='utf-8') as f:
+with open('members.json', 'w', encoding='utf-8') as f:
     json.dump(members_json, f, ensure_ascii=False, indent=4)
