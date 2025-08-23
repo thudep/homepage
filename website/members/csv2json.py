@@ -39,7 +39,7 @@ def html_name(member: dict) -> str:
         return name_to_pinyin(member['name'])
 
 # 导入csv数据与预处理
-csv_file = '../../../content/members/members.csv'
+csv_file = '../../content/members/members.csv'
 df = pd.read_csv(csv_file)
 members_list = df.to_dict(orient='records')
 
