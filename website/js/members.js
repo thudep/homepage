@@ -6,57 +6,38 @@ function loadmembers(session){
     return fetch('./members/members.json')
         .then(response => response.json())
         .then(members => {
-            let members_num = 0
+            let membersNum = 0
+            const DepartmentsName = ['宣传口', '赛事口', '科创口', '技术口', '常务口']
+            let DepartmentsLabel = new Array(DepartmentsName.length).fill(0);
+            const DepartmentsIndex = DepartmentsName.reduce((acc, name, index) => {
+                acc[name] = index;
+                return acc;
+            }, {});
 
+            // 主席
             const Chairman = document.getElementById('chairman')
             Chairman.innerHTML = ''
             const VCS = document.getElementById('vice-chairmans')
             VCS.innerHTML = ''
-            // 宣传口
-            const Publicity = document.createElement('div')
-            Publicity.classList.add('vc-container')
-            const PublicityVC = document.createElement('div')
-            PublicityVC.classList.add('vice-chairman')
-            Publicity.appendChild(PublicityVC)
-            const PublicityMembers = document.createElement('div')
-            PublicityMembers.classList.add('officers')
-            Publicity.appendChild(PublicityMembers)
-            // 赛事口
-            const Event = document.createElement('div')
-            Event.classList.add('vc-container')
-            const EventVC = document.createElement('div')
-            EventVC.classList.add('vice-chairman')
-            Event.appendChild(EventVC)
-            const EventMembers = document.createElement('div')
-            EventMembers.classList.add('officers')
-            Event.appendChild(EventMembers)
-            // 科创口
-            const Creation = document.createElement('div')
-            Creation.classList.add('vc-container')
-            const CreationVC = document.createElement('div')
-            CreationVC.classList.add('vice-chairman')
-            Creation.appendChild(CreationVC)
-            const CreationMembers = document.createElement('div')
-            CreationMembers.classList.add('officers')
-            Creation.appendChild(CreationMembers)
-            // 技术口
-            const Tech = document.createElement('div')
-            Tech.classList.add('vc-container')
-            const TechVC = document.createElement('div')
-            TechVC.classList.add('vice-chairman')
-            Tech.appendChild(TechVC)
-            const TechMembers = document.createElement('div')
-            TechMembers.classList.add('officers')
-            Tech.appendChild(TechMembers)
-            // 常务口
-            const Routine = document.createElement('div')
-            Routine.classList.add('vc-container')
-            const RoutineVC = document.createElement('div')
-            RoutineVC.classList.add('vice-chairman')
-            Routine.appendChild(RoutineVC)
-            const RoutineMembers = document.createElement('div')
-            RoutineMembers.classList.add('officers')
-            Routine.appendChild(RoutineMembers)
+            
+            // 副主席与干事
+            const Deparments = []
+            DepartmentsName.forEach((name, index) => {
+                const container = document.createElement("div");
+                container.classList.add("vc-container");
+                const vc = document.createElement("div");
+                vc.classList.add("vice-chairman");
+                container.appendChild(vc);
+                const members = document.createElement("div");
+                members.classList.add("officers");
+                container.appendChild(members);
+                Deparments[index] = {
+                    name,
+                    container,
+                    vc,
+                    members
+                };
+            });
             
             members.forEach(member => {
                 for(let s=1; s<=5; s++){
@@ -90,7 +71,7 @@ function loadmembers(session){
                                 Position.innerHTML = `第${session}届科协主席`
                             }
                             Node.appendChild(Position)
-                            members_num ++
+                            membersNum ++
                         }
                         
                         // 找到副主席
@@ -118,31 +99,9 @@ function loadmembers(session){
                             Deparment.classList.add('department')
                             Deparment.textContent = member[`department${s}`]
                             Node.appendChild(Deparment)
-                            switch(member[`department${s}`]){
-                                case '宣传口':
-                                    PublicityVC.appendChild(Node)
-                                    VCS.appendChild(Publicity)
-                                    break
-                                case '赛事口':
-                                    EventVC.appendChild(Node)
-                                    VCS.appendChild(Event)
-                                    break
-                                case '科创口':
-                                    CreationVC.appendChild(Node)
-                                    VCS.appendChild(Creation)
-                                    break
-                                case '技术口':
-                                    TechVC.appendChild(Node)
-                                    VCS.appendChild(Tech)
-                                    break
-                                case '常务口':
-                                    RoutineVC.appendChild(Node)
-                                    VCS.appendChild(Routine)
-                                    break
-                                default:
-                                    break
-                            }
-                            members_num ++
+                            Deparments[DepartmentsIndex[member[`department${s}`]]].vc.appendChild(Node)
+                            DepartmentsLabel[DepartmentsIndex[member[`department${s}`]]] = 1
+                            membersNum ++
                         }
 
                         // 其余干事
@@ -157,31 +116,17 @@ function loadmembers(session){
                             link.target = '_blank'
                             Officer.appendChild(link)
                             // 部门
-                            switch(member[`department${s}`]){
-                                case '宣传口':
-                                    PublicityMembers.appendChild(Officer)
-                                    break
-                                case '赛事口':
-                                    EventMembers.appendChild(Officer)
-                                    break
-                                case '科创口':
-                                    CreationMembers.appendChild(Officer)
-                                    break
-                                case '技术口':
-                                    TechMembers.appendChild(Officer)
-                                    break
-                                case '常务口':
-                                    RoutineMembers.appendChild(Officer)
-                                    break
-                                default:
-                                    break
-                            }
-                            members_num ++
+                            Deparments[DepartmentsIndex[member[`department${s}`]]].members.appendChild(Officer)
+                            membersNum ++
                         }
                         break
                     }
                 }
             });
+
+            for(let d=0; d<DepartmentsLabel.length; d++){
+                if(DepartmentsLabel[d]) VCS.appendChild(Deparments[d].container);
+            }
 
             drawConnections()
             hoverEffect()
@@ -197,7 +142,7 @@ function loadmembers(session){
                     reload(SESSION);
                 })
             })
-            return members_num
+            return membersNum
         })
         .catch(error => console.error('Error loading members:', error));
 }
@@ -251,7 +196,7 @@ function drawConnections() {
                     ${vcX},${vcY}`;
         
         path.setAttribute('d', d);
-        path.setAttribute('stroke', '#3498db');
+        path.setAttribute('stroke', 'rgb(102, 8, 116)');
         path.setAttribute('stroke-width', '2');
         path.setAttribute('fill', 'none');
         path.setAttribute('stroke-dasharray', '5,5');
@@ -263,8 +208,8 @@ function drawConnections() {
 function loadAll(){
     SESSION = NOW_SESSION
     document.getElementById('number-session').textContent = NOW_SESSION;
-    loadmembers(SESSION).then(members_num => {
-        document.getElementById('number-members').textContent = members_num;
+    loadmembers(SESSION).then(membersNum => {
+        document.getElementById('number-members').textContent = membersNum;
     })
 }
 
