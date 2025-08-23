@@ -3,9 +3,11 @@ const NOW_SESSION = 33 // 主显示届数
 let SESSION = NOW_SESSION
 
 function loadmembers(session){
-    fetch('./members/members.json')
+    return fetch('./members/members.json')
         .then(response => response.json())
         .then(members => {
+            let members_num = 0
+
             const Chairman = document.getElementById('chairman')
             Chairman.innerHTML = ''
             const VCS = document.getElementById('vice-chairmans')
@@ -88,6 +90,7 @@ function loadmembers(session){
                                 Position.innerHTML = `第${session}届科协主席`
                             }
                             Node.appendChild(Position)
+                            members_num ++
                         }
                         
                         // 找到副主席
@@ -139,6 +142,7 @@ function loadmembers(session){
                                 default:
                                     break
                             }
+                            members_num ++
                         }
 
                         // 其余干事
@@ -172,6 +176,7 @@ function loadmembers(session){
                                 default:
                                     break
                             }
+                            members_num ++
                         }
                         break
                     }
@@ -192,6 +197,7 @@ function loadmembers(session){
                     reload(SESSION);
                 })
             })
+            return members_num
         })
         .catch(error => console.error('Error loading members:', error));
 }
@@ -256,7 +262,10 @@ function drawConnections() {
 
 function loadAll(){
     SESSION = NOW_SESSION
-    loadmembers(SESSION)
+    document.getElementById('number-session').textContent = NOW_SESSION;
+    loadmembers(SESSION).then(members_num => {
+        document.getElementById('number-members').textContent = members_num;
+    })
 }
 
 function reload(session){
