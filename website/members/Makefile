@@ -9,5 +9,5 @@ html: members.json
 .PHONY: clean
 
 clean:
-	rm members.json
+	rm -f members.json
 	find member -type f ! -name '.gitignore' ! -name 'template.html' -delete
