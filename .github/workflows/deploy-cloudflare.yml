@@ -13,8 +13,18 @@ jobs:
       # 拉取代码
       - uses: actions/checkout@v4
       # 安装依赖
-      - name: Install dependencies
+      - name: Install python dependencies
         run: pip install beautifulsoup4 pandas pypinyin
+      - name: Setup mdBook
+        uses: peaceiris/actions-mdbook@v2
+        with:
+          mdbook-version: "latest"
+      - name: Setup mdbook-katex
+        uses: supplypike/setup-bin@v4
+        with:
+          uri: "https://github.com/lzanini/mdbook-katex/releases/download/0.9.2-binaries/mdbook-katex-v0.9.2-x86_64-unknown-linux-gnu.tar.gz"
+          name: "mdbook-katex"
+          version: "0.9.2"
       # 补全网页内容
       - name: Run Makefile
         run: make all
