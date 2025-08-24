@@ -1,0 +1,77 @@
+main{
+    margin-top: 80px;
+    margin-left: 15vw;
+}
+
+/* 部分样式 */
+.section {
+    margin-bottom: 60px;
+    position: relative;
+}
+
+.section-title {
+    position: relative;
+    margin-bottom: 30px;
+    padding-left: 20px;
+}
+
+.section-title h1 {
+    display: inline-block;
+    background: linear-gradient(135deg, #8a2be2, #6a0dad);
+    color: white;
+    padding: 15px 25px 15px 30px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+    width: 85%;
+    max-width: 50vw;
+}
+
+.section-content {
+    padding: 0 25px;
+}
+
+.info-item {
+    margin-bottom: 20px;
+    padding-left: 20px;
+    border-left: 3px solid #e0d6f2;
+    transition: all 0.3s ease;
+}
+
+.info-item:hover {
+    border-left-color: #8a2be2;
+    transform: translateX(5px);
+}
+
+.info-item p {
+    margin-bottom: 5px;
+}
+
+.info-title {
+    font-weight: 600;
+    color: #6a0dad;
+    margin-right: 10px;
+}
+.info-title a{
+    color: #6a0dad;
+    text-decoration: none;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.section {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+.section:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.section:nth-child(3) {
+    animation-delay: 0.4s;
+}
