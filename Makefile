@@ -24,6 +24,7 @@ website/logs:
 
 all: banners website/logs
 	$(MAKE) -C website/members html
+	$(MAKE) -C website/publicity publicity.json
 
 serve: all
 	python website/serve.py
