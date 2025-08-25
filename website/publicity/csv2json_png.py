@@ -10,7 +10,7 @@ from PIL import Image
 from pypinyin import pinyin, Style
 
 def fetch_article_info(url):
-    "从对应的链接中获取文章的标题与封面图链接"
+    "从对应的链接中获取文章的标题、封面图链接与日期"
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
     }
@@ -30,7 +30,13 @@ def fetch_article_info(url):
     cover_img = soup.find('meta', property='og:image') or soup.find('meta', attrs={'name': 'image'})
     cover_url = cover_img.get('content', '').strip() if cover_img else None
 
-    return title, cover_url
+    # 提取日期
+    pattern = r"var createTime\s*=\s*'(\d{4}-\d{2}-\d{2} \d{2}:\d{2})'"
+    match = re.search(pattern, response.text)
+    full_datetime = match.group(1)
+    publish_date = full_datetime.split(' ')[0]  # 提取日期部分
+
+    return title, cover_url, publish_date
 
 def title_to_pngname(title):
     "将标题中的中文字符转化为拼音首字母, 其他字符忽略"
@@ -76,7 +82,7 @@ def process_wechat_articles(csv):
 
     for url in df["url"].dropna():
         try:
-            title, cover_img_url = fetch_article_info(url)
+            title, cover_img_url, publish_date = fetch_article_info(url)
             if not title or not cover_img_url:
                 print(f"无法获取文章信息: {url}")
                 continue
@@ -87,7 +93,8 @@ def process_wechat_articles(csv):
             results.append({
                 "title": title,
                 "url": url,
-                "cover_image": pngname
+                "cover_image": pngname,
+                "publish_date": publish_date
             })
         except Exception as e:
             print(f"处理失败: {url}, 错误: {e}")

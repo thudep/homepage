@@ -34,6 +34,7 @@ serve: all
 
 clean: clean_banners
 	$(MAKE) -C website/members clean
+	$(MAKE) -C website/publicity clean
 	rm -rf website/logs
 
 remake: clean all
