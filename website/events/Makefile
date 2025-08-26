@@ -5,7 +5,7 @@ EVENTS := ../../content/events
 html:
 	python3 md2html.py $(EVENTS)
 	cp $(EVENTS)/cover_img/*.png .
-	cp -r $(EVENTS)/img img
+	if [ -d "$(EVENTS)/img" ]; then cp -r $(EVENTS)/img img; fi
 
 .PHONY: clean
 
