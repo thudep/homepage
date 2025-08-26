@@ -12,6 +12,14 @@ jobs:
     steps:
       # 拉取代码
       - uses: actions/checkout@v4
+      # 缓存 APT 包目录
+      - name: Cache APT packages
+        uses: actions/cache@v4
+        with:
+          path: /var/cache/apt/archives
+          key: ${{ runner.os }}-apt-${{ hashFiles('**/Makefile') }}
+          restore-keys: |
+            ${{ runner.os }}-apt-
       # 安装依赖
       - name: Install pandoc
         run: |
