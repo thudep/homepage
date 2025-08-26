@@ -1,0 +1,129 @@
+main{
+    margin: 100px 15vw 20px;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+}
+
+main h1 {
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 2.8rem;
+    color: #fff;
+    margin: 1.5rem 0;
+    text-shadow: 0 0 15px rgba(138, 43, 226, 0.7);
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, #8a2be2, #5d9afc, #8a2be2);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 3s linear infinite;
+    position: relative;
+    padding-bottom: 1rem;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+main h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% + 2em);
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #8a2be2, transparent);
+}
+
+main h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 500;
+    font-size: 1.8rem;
+    color: #fff;
+    margin: 2.5rem 0 1.2rem;
+    padding: 0.8rem 1.2rem;
+    position: relative;
+    width: fit-content;
+    max-width: 90%;
+}
+
+main h2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% + 4em);
+    height: 100%;
+    background: linear-gradient(135deg, #8a2be2, #6a0dad);
+    clip-path: polygon(0 0, 100% 0, calc(100% - 2em) 100%, 0% 100%);
+    z-index: -1;
+}
+
+main h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 500;
+    font-size: 1.4rem;
+    color: #8a2be2;
+    margin: 2rem 0 1rem;
+    padding-left: 0.8rem;
+    border-left: 3px solid #8a2be2;
+}
+
+main h4, main h5, main h6{
+    font-family: 'Orbitron', sans-serif;
+    margin: 1rem 0;
+}
+main h4{
+    font-size: 1.3rem;
+}
+main h5{
+    font-size: 1.2rem;
+}
+main h6{
+    font-size: 1.1rem;
+}
+
+main p {
+    margin-bottom: 1.2rem;
+    font-size: 1.05rem;
+    text-align: justify;
+}
+
+main ul {
+    margin: 1.2rem 0;
+    padding-left: 1.8rem;
+    list-style-type: none;
+}
+
+main li {
+    margin-bottom: 0.7rem;
+    position: relative;
+}
+
+main li::before {
+    content: '▶';
+    color: #8a2be2;
+    position: absolute;
+    left: -1.5rem;
+    top: 0.1rem;
+    font-size: 0.8rem;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@media (max-width: 768px) {
+    main h1 {
+        font-size: 2.2rem;
+    }
+    
+    main h2 {
+        font-size: 1.5rem;
+        max-width: 100%;
+    }
+}

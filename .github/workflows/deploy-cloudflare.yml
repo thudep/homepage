@@ -13,6 +13,10 @@ jobs:
       # 拉取代码
       - uses: actions/checkout@v4
       # 安装依赖
+      - name: Install pandoc
+        run: |
+          apt-get update
+          apt-get install -y pandoc
       - name: Install python dependencies
         run: pip install beautifulsoup4 pandas pypinyin requests pillow
       - name: Setup mdBook

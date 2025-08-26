@@ -24,6 +24,7 @@ website/logs:
 
 all: banners website/logs
 	$(MAKE) -C website/members html
+	$(MAKE) -C website/events html
 	$(MAKE) -C website/publicity publicity.json
 
 serve: all
@@ -34,6 +35,7 @@ serve: all
 
 clean: clean_banners
 	$(MAKE) -C website/members clean
+	$(MAKE) -C website/events clean
 	$(MAKE) -C website/publicity clean
 	rm -rf website/logs
 
