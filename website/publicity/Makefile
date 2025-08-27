@@ -7,6 +7,7 @@ publicity.json:
 
 clean:
 	rm -f publicity.json
+	rm -rf __pycache__
 	find . -type f -name "*.png" -delete
 
 remake: clean publicity.json

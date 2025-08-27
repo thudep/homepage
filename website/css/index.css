@@ -1,22 +1,193 @@
-body{
-    background: linear-gradient(135deg, rgb(102, 8, 116), darkblue, rgb(102, 8, 116));
-    color: #fff;
-    min-height: 100vh; 
-    padding-top: 100px;
-    background-attachment: fixed;
-    background-size: cover;
-    position: relative;
+/* Main 内容区域 */
+main {
+    width: 100%;
+    margin: 0 auto;
 }
 
-body::before{
-    content: '';
+/* 轮播容器 - 全屏 */
+.news-carousel {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* 轮播项目 */
+.carousel-item {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: url(../img/background.jpg) no-repeat center center;
-    background-size: cover;
-    opacity: 0.3;
-    z-index: -1;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+}
+
+.carousel-item.active {
+    pointer-events: auto;
+    opacity: 1;
+}
+
+/* 图片链接容器 */
+.image-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* 新闻图片 */
+.news-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+}
+
+/* 新闻标题容器 */
+.title-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    background: linear-gradient(
+        to bottom, 
+        rgba(0, 0, 0, 0.2) 80%,
+        rgba(0, 0, 0, 0.4) 90%,
+        rgba(0, 0, 0, 0.7) 100%
+    );
+}
+
+/* 新闻标题 */
+.news-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    text-align: center;
+    width: 70%;
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    line-height: 1.2;
+    pointer-events: none;
+}
+
+/* 导航按钮 */
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.4);
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 1.8rem;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.carousel-control:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.carousel-control.prev {
+    left: 30px;
+}
+
+.carousel-control.next {
+    right: 30px;
+}
+
+/* 指示器 */
+.carousel-indicators {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 10;
+}
+
+.indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.indicator.active {
+    background: #FFD700;
+    transform: scale(1.3);
+}
+
+/* 加载提示 */
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+/* 响应式设计 */
+@media (max-width: 992px) {
+    .news-title {
+        font-size: 2.8rem;
+        width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    .news-title {
+        font-size: 2.2rem;
+        width: 85%;
+    }
+    
+    .carousel-control {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+    
+    .carousel-control.prev {
+        left: 15px;
+    }
+    
+    .carousel-control.next {
+        right: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .news-title {
+        font-size: 1.8rem;
+        width: 90%;
+    }
+    
+    .carousel-indicators {
+        bottom: 25px;
+    }
+    
+    .indicator {
+        width: 12px;
+        height: 12px;
+    }
+    
+    .news-grid {
+        grid-template-columns: 1fr;
+    }
 }

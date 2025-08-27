@@ -23,6 +23,7 @@ website/logs:
 .PHONY: all serve
 
 all: banners website/logs
+	$(MAKE) -C website/index show.json
 	$(MAKE) -C website/members html
 	$(MAKE) -C website/events html
 	$(MAKE) -C website/publicity publicity.json
@@ -34,6 +35,7 @@ serve: all
 .PHONY: clean remake reload
 
 clean: clean_banners
+	$(MAKE) -C website/index clean
 	$(MAKE) -C website/members clean
 	$(MAKE) -C website/events clean
 	$(MAKE) -C website/publicity clean
