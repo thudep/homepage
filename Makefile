@@ -25,7 +25,7 @@ website/logs:
 all: banners website/logs
 	$(MAKE) -C website/index show.json
 	$(MAKE) -C website/members html
-	$(MAKE) -C website/events html
+	$(MAKE) -C website/events json
 	$(MAKE) -C website/publicity publicity.json
 
 serve: all

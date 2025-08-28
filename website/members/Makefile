@@ -4,7 +4,7 @@ members.json:
 	python csv2json.py
 
 ../events/events.json:
-	$(MAKE) -C ../events html
+	$(MAKE) -C ../events events.json
 
 html: members.json ../events/events.json
 	python json2html.py

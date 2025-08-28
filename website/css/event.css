@@ -111,6 +111,75 @@ main li::before {
     font-size: 0.8rem;
 }
 
+/* h2 右侧的上下切换按钮容器：利用 h2 的 position: relative 进行定位 */
+.session-nav {
+  position: absolute;
+  right: -3.6rem;        /* 与 h2::before 的右侧斜切宽度相呼应，可按实际微调 */
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  gap: 0.5rem;
+  pointer-events: auto;
+}
+
+/* 参考你给的按钮样式，稍加通用化与禁用/聚焦态 */
+.session-change-btn {
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  color: #fff;
+  font-size: 1.2rem;
+  backdrop-filter: blur(2px);
+}
+
+.session-change-btn:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: scale(1.1);
+}
+
+.session-change-btn:focus-visible {
+  outline: 2px solid rgba(255,255,255,0.75);
+  outline-offset: 2px;
+}
+
+.session-change-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* 人员列表：横排、自动换行、间距 */
+.member-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;          /* 每两人之间留空 */
+  margin: 0.6rem 0 1.6rem 0;
+}
+
+.member-item {
+  font-size: 1rem;
+  line-height: 1.8;
+  white-space: nowrap;
+}
+
+.member-item a {
+  color: #6a0dad;
+  text-decoration: none;
+  border-bottom: 1px dashed transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+/* 如果你想视觉上轻微强调 leader（不改变布局与一致性） */
+/* .member-item.leader {
+  font-weight: 600;
+} */
+
 @keyframes gradientShift {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
