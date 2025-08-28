@@ -41,6 +41,14 @@ jobs:
       - name: Run Makefile
         run: make all
       # 部署网页
+      - name: Build dist directory
+        run: |
+          mkdir -p dist
+          rsync -av website/ dist/ \
+            --exclude='*.py' \
+            --exclude='__pycache__/' \
+            --exclude='.gitignore' \
+            --exclude='Makefile'
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:

@@ -1,4 +1,0 @@
-Makefile
-*.py
-__pycache__/
-.gitignore
