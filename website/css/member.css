@@ -47,6 +47,10 @@ main{
 .info-item p {
     margin-bottom: 5px;
 }
+.info-item a{
+    color: #6a0dad;
+    text-decoration: none;
+}
 
 .info-title {
     font-weight: 600;

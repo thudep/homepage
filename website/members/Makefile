@@ -3,7 +3,10 @@
 members.json:
 	python csv2json.py
 
-html: members.json
+../events/events.json:
+	$(MAKE) -C ../events html
+
+html: members.json ../events/events.json
 	python json2html.py
 
 .PHONY: clean

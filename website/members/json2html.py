@@ -1,11 +1,10 @@
 import json
 from bs4 import BeautifulSoup
 
-def link(soup, href, icon):
-    "链接为 href 的 icon 图标"
-    a = soup.new_tag("a", href=href, target="_blank", **{"class": "conduct"})
-    i = soup.new_tag("i", **{"class": icon})
-    a.append(i)
+def link(soup, href, content, target='_self'):
+    "链接为 href , 内容为 content 的 <a>"
+    a = soup.new_tag("a", href=href, target=target, **{"class": "conduct"})
+    a.append(content)
     return a
 
 def add_item(soup, div, title, content):
@@ -18,14 +17,31 @@ def add_item(soup, div, title, content):
     else:
         span.append(title)
     p.append(span)
-    p.append(content)
+    if isinstance(content, list):
+        p.extend(content)
+    else:
+        p.append(content)
     item.append(p)
     div.append(item)
+
+def split_by_event_title(events, text: str):
+    """
+    遍历 events, 检查 text 是否包含某个 event['title']:
+    如果找到, 返回 [前缀, event, 后缀], 否则返回原始 text
+    """
+    for event in events:
+        title = event['title']
+        idx = text.find(title)
+        if idx != -1:
+            return [text[:idx], event, text[idx+len(title):]]
+    return text
 
 def main():
     # 读取json
     with open('members.json', 'r', encoding='utf-8') as f:
         members = json.load(f)
+    with open('../events/events.json', 'r', encoding='utf-8') as f:
+        events = json.load(f)
 
     # 遍历每个人, 生成对应的网页
     for member in members:
@@ -40,12 +56,19 @@ def main():
             add_item(soup, div, '班级', member['class'])
         if 'mail' in member:
             add_item(soup, div,
-                     ['邮箱', link(soup, f"mailto:{member['mail']}", "fas fa-envelope")],
+                     ['邮箱',
+                      link(soup,
+                           f"mailto:{member['mail']}",
+                           soup.new_tag("i", **{"class": "fas fa-envelope"}),
+                           target='_blank')],
                      member['mail'])
         if 'GitHub' in member:
             add_item(soup, div,
                      ['GitHub',
-                      link(soup, f"https://github.com/{member['GitHub']}", 'fab fa-github'),
+                      link(soup,
+                           f"https://github.com/{member['GitHub']}",
+                           soup.new_tag("i", **{"class": "fab fa-github"}),
+                           target='_blank'),
                       '用户名'],
                      member['GitHub'])
         # 补充任职情况
@@ -62,7 +85,12 @@ def main():
         div = soup.find(id="work")
         w = 1
         while f'work{w}' in member:
-            add_item(soup, div, '', member[f'work{w}'])
+            work = split_by_event_title(events, member[f'work{w}'])
+            if isinstance(work, list):
+                work[1] = link(soup,
+                               f"../../{work[1]['url']}",
+                               work[1]['title'])
+            add_item(soup, div, '', work)
             w += 1
 
         # 保存结果

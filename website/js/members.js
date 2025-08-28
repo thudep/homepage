@@ -54,7 +54,6 @@ function loadmembers(session){
                             const link = document.createElement("a")
                             link.href = `members/member/${member['website']}.html`
                             link.innerText = member['name']
-                            link.target = '_blank'
                             Name.appendChild(link)
                             Node.appendChild(Name)
                             // 职务
@@ -84,7 +83,6 @@ function loadmembers(session){
                             const link = document.createElement("a")
                             link.href = `members/member/${member['website']}.html`
                             link.innerText = member['name']
-                            link.target = '_blank'
                             Name.appendChild(link)
                             if(member[`position${s+1}`] === "主席"){
                                 Name.insertAdjacentHTML("beforeend", `
@@ -113,7 +111,6 @@ function loadmembers(session){
                             const link = document.createElement("a")
                             link.href = `members/member/${member['website']}.html`
                             link.innerText = member['name']
-                            link.target = '_blank'
                             Officer.appendChild(link)
                             // 部门
                             Deparments[DepartmentsIndex[member[`department${s}`]]].members.appendChild(Officer)
