@@ -1,7 +1,8 @@
 CSV_PATH = ../../content/publicity/publicity.csv
+CACHE_DIR = ../../cache_dir
 
 publicity.json:
-	python csv2json_png.py $(CSV_PATH)
+	python csv2json_png.py $(CSV_PATH) $(CACHE_DIR)
 
 .PHONY: clean remake
 

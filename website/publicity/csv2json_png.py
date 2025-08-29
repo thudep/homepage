@@ -1,7 +1,9 @@
 "从网页链接的 csv 中获取标题与封面图, 并生成对应的 json , 以及封面图的 png"
 from io import BytesIO
 import json
+import os
 import re
+import shutil
 import sys
 import pandas as pd
 import requests
@@ -60,7 +62,7 @@ def title_to_pngname(title):
     filename = ''.join(initials) if initials else "unknown"
     return filename + ".png"
 
-def save_cover_image(img_url, pngname):
+def save_cover_image(img_url, pngname, cache):
     "保存封面图"
     response = requests.get(img_url, timeout=10)
     response.raise_for_status()
@@ -73,38 +75,75 @@ def save_cover_image(img_url, pngname):
         img = background
 
     img.save(pngname, "PNG")
+    cache_png = os.path.join(cache, pngname)
+    img.save(cache_png, "PNG")
 
-def process_wechat_articles(csv):
+def process_wechat_articles(csv, cache):
     "处理微信公众号文章"
     results = []
     # 用 pandas 读取 CSV
     df = pd.read_csv(csv)
+    # 读取缓存的 cache.json
+    cache_json = os.path.join(cache, "cache.json")
+    if os.path.exists(cache_json):
+        with open(cache_json, "r", encoding="utf-8") as f:
+            cache_data = json.load(f)
+    else:
+        cache_data = []
 
     for url in df["url"].dropna():
-        try:
-            title, cover_img_url, publish_date = fetch_article_info(url)
-            if not title or not cover_img_url:
-                print(f"无法获取文章信息: {url}")
-                continue
+        # 从缓存中查找
+        for data in cache_data:
+            if url == data['url']:
+                pngname = data['cover_image']
+                png_path = os.path.join(cache, pngname)
+                if not os.path.isfile(png_path):
+                    continue
 
-            pngname = title_to_pngname(title)
-            save_cover_image(cover_img_url, pngname)
+                dst_dir = os.path.dirname(os.path.abspath(__file__))
+                dst = os.path.join(dst_dir, pngname)
+                shutil.copy(png_path, dst)
+                results.append(data)
+                break
 
-            results.append({
-                "title": title,
-                "url": url,
-                "cover_image": pngname,
-                "publish_date": publish_date
-            })
-        except Exception as e:
-            print(f"处理失败: {url}, 错误: {e}")
+        # 从网站中获取
+        else:
+            try:
+                print(f"正在获取新文章信息: {url}")
+                title, cover_img_url, publish_date = fetch_article_info(url)
+                if not title or not cover_img_url:
+                    print(f"无法获取文章信息: {url}")
+                    continue
+
+                pngname = title_to_pngname(title)
+                save_cover_image(cover_img_url, pngname, cache)
+
+                results.append({
+                    "title": title,
+                    "url": url,
+                    "cover_image": pngname,
+                    "publish_date": publish_date
+                })
+                cache_data.append({
+                    "title": title,
+                    "url": url,
+                    "cover_image": pngname,
+                    "publish_date": publish_date
+                })
+            except Exception as e:
+                print(f"处理失败: {url}, 错误: {e}")
 
     # 保存结果为JSON
     with open("publicity.json", "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=4)
 
+    # 更新缓存JSON结果
+    with open(cache_json, "w", encoding="utf-8") as f:
+        json.dump(cache_data, f, ensure_ascii=False, indent=4)
+
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
+    if len(sys.argv) != 3:
         sys.exit(1)
     csv_path = sys.argv[1]
-    process_wechat_articles(csv_path)
+    cache_dir = sys.argv[2]
+    process_wechat_articles(csv_path, cache_dir)

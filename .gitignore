@@ -1,3 +1,4 @@
 test*
 website/logs
 __pycache__
+cache_dir

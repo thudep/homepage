@@ -32,7 +32,11 @@ serve: all
 	python website/serve.py
 
 # 清理与重建部分
-.PHONY: clean remake reload
+.PHONY: clean_cache clean remake reload
+
+clean_cache:
+	rm -rf cache_dir
+	mkdir -p cache_dir
 
 clean: clean_banners
 	$(MAKE) -C website/index clean
