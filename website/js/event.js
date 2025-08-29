@@ -1,37 +1,12 @@
 // 通用：在任何赛事页里直接引入即可
 document.addEventListener("DOMContentLoaded", () => {
     const pageName = window.location.pathname.split("/").pop().replace(/\.html$/i, "");
-
-    // 可能的 JSON 相对路径（从近到远，命中即用）
-    const candidates = [
-        `${pageName}.json`,
-        `./${pageName}.json`,
-        `event/${pageName}.json`,
-        `../event/${pageName}.json`,
-        `../../event/${pageName}.json`,
-        `json/${pageName}.json`,
-        `../json/${pageName}.json`,
-        `../../json/${pageName}.json`,
-    ];
+    const jsonPath = `${pageName}.json`;
 
     (async function init() {
-        let events = null;
-        let usedPath = null;
-
-        for (const p of candidates) {
-            try {
-                const res = await fetch(p, { cache: "no-store" });
-                if (res.ok) {
-                    events = await res.json();
-                    usedPath = p;
-                    break;
-                }
-            } catch (_) {}
-        }
-        if (!Array.isArray(events) || events.length === 0) {
-            console.error("未找到有效的赛事 JSON：", candidates);
-            return;
-        }
+        const res = await fetch(jsonPath, { cache: "no-store" });
+        if (!res.ok) throw new Error(`无法加载 JSON: ${jsonPath}`);
+        const events = await res.json();
 
         // 以 session 排序，默认显示最新（最大）
         events.sort((a, b) => (a.session || 0) - (b.session || 0));
