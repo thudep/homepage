@@ -1,6 +1,12 @@
 *{
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
+    font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
+}
+
+html{
+    font-size: 16px;
 }
 
 .normal{
@@ -8,7 +14,7 @@
     text-align: inherit !important;
     max-width: none !important;
     word-wrap: normal !important;
-    color: blue !important;
+    color: #6a0dad !important;
     white-space: normal !important;
     font-weight: normal !important;
     line-height: 1.5 !important;
@@ -19,4 +25,13 @@
 }
 .nohoverline{
     text-decoration: none !important;
+}
+
+@media (max-width: 720px){
+    :root {
+    --main-width: 720;
+    }
+    html{
+        font-size: calc(16 / var(--main-width) * 100vw);
+    }
 }

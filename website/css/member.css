@@ -24,8 +24,8 @@ main{
     font-weight: 500;
     position: relative;
     clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
-    width: 85%;
-    max-width: 50vw;
+    width: 40rem;
+    max-width: 70vw;
 }
 
 .section-content {
@@ -78,4 +78,54 @@ main{
 
 .section:nth-child(3) {
     animation-delay: 0.4s;
+}
+
+/* 响应式设计 */
+@media (min-width: 720px) and (max-width: 1080px){
+    .section{
+        margin-bottom: calc(100vw / 12 - 30px);
+    }
+}
+
+@media (max-width: 720px){
+    main{
+        margin-left: 10vw;
+    }
+    .section-title h1{
+        max-width: 80vw;
+    }
+
+    :root {
+        --member-width: 720;
+    }
+    main{
+        margin-top: calc(80 / var(--member-width) * 100vw);
+    }
+    .section{
+        margin-bottom: calc(30 / var(--member-width) * 100vw);
+    }
+    .section-title {
+        margin-bottom: calc(30 / var(--member-width) * 100vw);
+        padding-left: calc(20 / var(--member-width) * 100vw);
+    }
+    .section-title h1 {
+        padding: calc(15 / var(--member-width) * 100vw) calc(25 / var(--member-width) * 100vw) calc(15 / var(--member-width) * 100vw) calc(30 / var(--member-width) * 100vw);
+    }
+    .section-content {
+        padding: 0 calc(25 / var(--member-width) * 100vw);
+    }
+    .info-item {
+        margin-bottom: calc(20 / var(--member-width) * 100vw);
+        padding-left: calc(20 / var(--member-width) * 100vw);
+        border-left: calc(3 / var(--member-width) * 100vw) solid #e0d6f2;
+    }
+    .info-item:hover {
+        transform: translateX(calc(5 / var(--member-width) * 100vw));
+    }
+    .info-item p {
+        margin-bottom: calc(5 / var(--member-width) * 100vw);
+    }
+    .info-title {
+        margin-right: calc(10 / var(--member-width) * 100vw);
+    }
 }

@@ -46,7 +46,7 @@ main h2 {
     padding: 0.8rem 1.2rem;
     position: relative;
     width: fit-content;
-    max-width: 90%;
+    max-width: 80%;
 }
 
 main h2::before {
@@ -179,24 +179,39 @@ main li::before {
   transition: border-color 0.2s ease, color 0.2s ease;
 }
 
-/* 如果你想视觉上轻微强调 leader（不改变布局与一致性） */
-/* .member-item.leader {
-  font-weight: 600;
-} */
-
 @keyframes gradientShift {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-@media (max-width: 768px) {
-    main h1 {
-        font-size: 2.2rem;
+@media (max-width: 720px){
+    :root {
+        --event-width: 720;
     }
-    
-    main h2 {
-        font-size: 1.5rem;
-        max-width: 100%;
+    main{
+        margin: calc(100 / var(--event-width) * 100vw) 15vw calc(20 / var(--event-width) * 100vw);
+    }
+    main h1 {
+        text-shadow: 0 0 calc(15 / var(--event-width) * 100vw) rgba(138, 43, 226, 0.7);
+        letter-spacing: calc(1 / var(--event-width) * 100vw);
+    }
+    main h1::after {
+        height: calc(3 / var(--event-width) * 100vw);
+    }
+    main h3 {
+        border-left: calc(3 / var(--event-width) * 100vw) solid #8a2be2;
+    }
+    .session-change-btn {
+        width: calc(36 / var(--event-width) * 100vw);
+        height: calc(36 / var(--event-width) * 100vw);
+        backdrop-filter: blur(calc(2 / var(--event-width) * 100vw));
+    }
+    .session-change-btn:focus-visible {
+        outline: calc(2 / var(--event-width) * 100vw) solid rgba(255,255,255,0.75);
+        outline-offset: calc(2 / var(--event-width) * 100vw);
+    }
+    .member-item a {
+        border-bottom: calc(1 / var(--event-width) * 100vw) dashed transparent;
     }
 }

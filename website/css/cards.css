@@ -71,14 +71,39 @@ main {
 }
 
 /* 响应式设计 */
-@media (max-width: 768px) {
+@media (max-width: 720px) {
     .show-card {
         flex-direction: column;
-        width: 90%;
-    }
-    
+        width: 80%;
+    }  
     .show-image {
         width: 100%;
-        height: 160px;
+        height: 40vw;
+    }
+
+    :root {
+        --cards-width: 720;
+    }
+    main {
+        gap: calc(25 / var(--cards-width) * 100vw);
+    }
+    .show-card {
+        border-radius: calc(12 / var(--cards-width) * 100vw);
+        box-shadow: 0 calc(4 / var(--cards-width) * 100vw) calc(12 / var(--cards-width) * 100vw) rgba(0, 0, 0, 0.1);
+    }
+    .show-card:hover {
+        box-shadow: 0 calc(8 / var(--cards-width) * 100vw) calc(20 / var(--cards-width) * 100vw) rgba(0, 0, 0, 0.15);
+    }
+    .show-content {
+        padding: calc(20 / var(--cards-width) * 100vw);
+    }
+    .show-title {
+        margin-bottom: calc(15 / var(--cards-width) * 100vw);
+    }
+    .loading {
+        padding: calc(40 / var(--cards-width) * 100vw);
+    }
+    .error {
+        padding: calc(40 / var(--cards-width) * 100vw);
     }
 }

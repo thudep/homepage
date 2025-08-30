@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const menuBtn = document.querySelector('.menu-btn');
+    const menuContainer = document.querySelector('.menu-container');
     const directoryMenu = document.querySelector('.directory-menu');
     const overlay = document.querySelector('.overlay');
     const menuItems = document.querySelector('.menu-items');
@@ -37,8 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // 切换菜单显示
-    menuBtn.addEventListener('click', function() {
-        this.classList.toggle('active');
+    menuContainer.addEventListener('click', function() {
         directoryMenu.classList.toggle('active');
         overlay.classList.toggle('active');
         
@@ -48,14 +47,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 点击关闭按钮关闭菜单
     closeBtn.addEventListener('click', function() {
-        menuBtn.classList.remove('active');
         directoryMenu.classList.remove('active');
         overlay.classList.remove('active');
     });
     
     // 点击覆盖层关闭菜单
     overlay.addEventListener('click', function() {
-        menuBtn.classList.remove('active');
         directoryMenu.classList.remove('active');
         this.classList.remove('active');
     });
@@ -63,7 +60,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // 点击菜单项关闭菜单
     menuItems.addEventListener('click', function(e) {
         if (e.target.tagName === 'A') {
-            menuBtn.classList.remove('active');
             directoryMenu.classList.remove('active');
             overlay.classList.remove('active');
         }
@@ -71,8 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 点击菜单外部关闭菜单
     document.addEventListener('click', function(e) {
-        if (!directoryMenu.contains(e.target) && !menuBtn.contains(e.target)) {
-            menuBtn.classList.remove('active');
+        if (!directoryMenu.contains(e.target) && !menuContainer.contains(e.target)) {
             directoryMenu.classList.remove('active');
             overlay.classList.remove('active');
         }

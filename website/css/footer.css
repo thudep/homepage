@@ -11,7 +11,7 @@ main{
 footer{
     background-color: black;
     color: lightgray;
-    line-height: 40px;
+    line-height: 2.5rem;
     text-align: center;
 }
 
@@ -21,5 +21,5 @@ footer a{
 }
 footer .contact{
     display: inline-block;
-    margin: 0 10px;
+    margin: 0 0.625rem;
 }

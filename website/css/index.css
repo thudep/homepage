@@ -1,5 +1,6 @@
 /* Main 内容区域 */
 main {
+    background-color: #0a0a1a;
     width: 100%;
     margin: 0 auto;
 }
@@ -8,8 +9,10 @@ main {
 .news-carousel {
     position: relative;
     width: 100%;
-    height: 100vh;
     overflow: hidden;
+    aspect-ratio: 16 / 9;
+    max-height: 100vh; /* 保证不会超出屏幕高度 */
+    margin: 0 auto;    /* 居中 */
 }
 
 /* 轮播项目 */
@@ -66,7 +69,7 @@ main {
 
 /* 新闻标题 */
 .news-title {
-    font-size: 3.5rem;
+    font-size: 4rem;
     font-weight: 800;
     text-align: center;
     width: 70%;
@@ -101,11 +104,11 @@ main {
 }
 
 .carousel-control.prev {
-    left: 30px;
+    left: 2rem;
 }
 
 .carousel-control.next {
-    right: 30px;
+    right: 2rem;
 }
 
 /* 指示器 */
@@ -115,13 +118,13 @@ main {
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 15px;
+    gap: 1rem;
     z-index: 10;
 }
 
 .indicator {
-    width: 16px;
-    height: 16px;
+    width: 1rem;
+    height: 1rem;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.7);
     cursor: pointer;
@@ -144,50 +147,32 @@ main {
 }
 
 /* 响应式设计 */
-@media (max-width: 992px) {
+@media (min-width: 720px) and (max-width: 1080px){
     .news-title {
-        font-size: 2.8rem;
+        font-size: 3rem;
         width: 80%;
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 720px){
     .news-title {
-        font-size: 2.2rem;
-        width: 85%;
+        font-size: 2rem;
     }
-    
-    .carousel-control {
-        width: 50px;
-        height: 50px;
-        font-size: 1.5rem;
-    }
-    
-    .carousel-control.prev {
-        left: 15px;
-    }
-    
-    .carousel-control.next {
-        right: 15px;
-    }
-}
 
-@media (max-width: 576px) {
+    :root {
+        --index-width: 720;
+    }
+    .news-image {
+        box-shadow: 0 calc(10 / var(--index-width) * 100vw) calc(30 / var(--index-width) * 100vw) rgba(0, 0, 0, 0.7);
+    }
     .news-title {
-        font-size: 1.8rem;
-        width: 90%;
+        text-shadow: calc(2 / var(--index-width) * 100vw) calc(2 / var(--index-width) * 100vw) calc(8 / var(--index-width) * 100vw) rgba(0, 0, 0, 0.8);
     }
-    
+    .carousel-control {
+        width: calc(60 / var(--index-width) * 100vw);
+        height: calc(60 / var(--index-width) * 100vw);
+    }
     .carousel-indicators {
-        bottom: 25px;
-    }
-    
-    .indicator {
-        width: 12px;
-        height: 12px;
-    }
-    
-    .news-grid {
-        grid-template-columns: 1fr;
+        bottom: calc(40 / var(--index-width) * 100vw);
     }
 }

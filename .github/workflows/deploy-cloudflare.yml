@@ -79,7 +79,8 @@ jobs:
             --exclude='*.py' \
             --exclude='__pycache__/' \
             --exclude='.gitignore' \
-            --exclude='Makefile'
+            --exclude='Makefile' \
+            --exclude='template.html'
       - name: Deploy  # 使用 wrangler 上传
         uses: cloudflare/wrangler-action@v3
         with:

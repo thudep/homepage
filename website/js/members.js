@@ -227,5 +227,13 @@ function reload(session){
 
 }
 
-window.addEventListener('load', loadAll());
-window.addEventListener('resize', drawConnections());
+function debounce(func, delay) {
+    let timeoutId;
+    return function() {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(func, delay);
+    };
+}
+
+window.addEventListener('DOMContentLoaded', loadAll);
+window.addEventListener('resize', debounce(drawConnections, 200));
