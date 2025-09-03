@@ -428,7 +428,7 @@
         gap: calc(8 / var(--media-width) * 100vw);
     }
     .officers::before {
-        top: -1calc(5 / var(--media-width) * 100vw);
+        top: calc(-15 / var(--media-width) * 100vw);
         height: calc(15 / var(--media-width) * 100vw);
         width: calc(2 / var(--media-width) * 100vw);
     }
