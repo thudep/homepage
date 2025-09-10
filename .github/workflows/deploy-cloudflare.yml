@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+    tags:
+      - "v*.*.*"
 
 jobs:
   deploy:
@@ -86,3 +88,33 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+
+  typst-release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # 安装 Typst + songting-book
+      - name: Install Typst
+        uses: typst-community/setup-typst@v3
+        with:
+          typst-version: "latest"
+      - name: Install songting-book
+        run: typst init @preview/songting-book
+
+      # 编译 PDF
+      - name: Run Makefile
+        run: make manual/manual.pdf
+
+      # 发布 Release
+      - name: Upload PDF as Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: manual/manual.pdf
+          name: Release ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
+          body: 自动生成的 PDF 手册
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}          

@@ -48,3 +48,7 @@ clean: clean_banners
 remake: clean all
 
 reload: clean serve
+
+# 工作手册
+manual/manual.pdf:
+	$(MAKE) -C manual manual.pdf
