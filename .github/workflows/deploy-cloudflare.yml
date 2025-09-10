@@ -9,7 +9,7 @@ on:
 
 jobs:
   deploy:
-    if: github.ref == 'refs/heads/master'
+    if: github.ref_type != 'tag'
     runs-on: ubuntu-latest
     name: Deploy
     steps:
