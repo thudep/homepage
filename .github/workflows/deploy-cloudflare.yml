@@ -9,6 +9,7 @@ on:
 
 jobs:
   deploy:
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     name: Deploy
     steps:
@@ -101,8 +102,6 @@ jobs:
         uses: typst-community/setup-typst@v3
         with:
           typst-version: "latest"
-      - name: Install songting-book
-        run: typst init @preview/songting-book
 
       # 编译 PDF
       - name: Run Makefile
